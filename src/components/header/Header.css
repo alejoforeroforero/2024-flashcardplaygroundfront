@@ -1,0 +1,110 @@
+#card-header {
+  .card-header-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+
+    p {
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    p:hover {
+      color: rgb(246, 239, 105);
+    }
+  }
+
+  .card-header-category-list {
+    display: flex;
+    justify-content: center;
+
+    p {
+      margin: 0 8px;
+      cursor: pointer;
+    }
+
+    p:hover {
+      color: rgb(246, 239, 105);
+    }
+  }
+
+  .form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-container-int {
+    width: 100%;
+    max-width: 520px;
+    padding-bottom: 80px;
+    text-align: center;
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      background-color: #f7e596;
+      border: none;
+      border-radius: 4px;
+      font: inherit;
+      font-weight: bold;
+      color: #3a4346;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #f9e175;
+    }
+  }
+
+  form {
+    width: 100%;
+    max-width: 520px;
+    padding-bottom: 80px;
+  }
+
+  p {
+    margin: 20px 0px;
+  }
+
+  span {
+    color: rgb(136, 137, 139);
+  }
+
+  .span-button {
+    cursor: pointer;
+  }
+
+  .active {
+    color: rgb(234, 233, 233);
+  }
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #dfd9be;
+    margin-bottom: 5px;
+  }
+
+  select {
+    font: inherit;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #b4b6c4;
+    border: none;
+    border-radius: 4px;
+  }
+
+  input {
+    font: inherit;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #b4b6c4;
+    border: none;
+    border-radius: 4px;
+  }
+}
