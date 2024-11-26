@@ -2,6 +2,6 @@ services:
   vite-app:
     build: .
     ports:
-      - "8084:80"
+      - "8091:80"
     volumes:
       - ./dist:/usr/share/nginx/html/0-flashcardsbackend
