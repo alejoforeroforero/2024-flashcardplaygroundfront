@@ -3,7 +3,7 @@ import axiosInstance from "./axios";
 
 export const getCategories = createAsyncThunk("getCategories", async () => {
   try {
-    const response = await axiosInstance.get("/api/categories");
+    const response = await axiosInstance.get("/api/categories/");
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
