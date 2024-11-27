@@ -13,7 +13,7 @@ export const searchCards = createAsyncThunk(
   'cards/search',
   async ({ query, page, pageSize = PAGE_SIZE }: SearchParams) => {
     try {
-      const response = await axiosInstance.get('/search/', {
+      const response = await axiosInstance.get('/search', {
         params: {
           query,
           page,
@@ -31,7 +31,7 @@ export const searchCards = createAsyncThunk(
 
 export const getCards = createAsyncThunk("getCards", async () => {
   try {
-    const response = await axiosInstance.get("/cards/");
+    const response = await axiosInstance.get("/cards");
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
@@ -49,7 +49,7 @@ export const fetchPaginatedCards = createAsyncThunk(
     pageSize?: number;
   }) => {
     try {
-      const response = await axiosInstance.get(`/cards/`, {
+      const response = await axiosInstance.get(`/cards`, {
         params: { page, page_size: pageSize },
       });
       return response.data;
@@ -72,7 +72,7 @@ export const getCardsByCategory = createAsyncThunk(
     pageSize?: number;
   }) => {
     try {
-      const response = await axiosInstance.get(`/categories/${id}/cards/`, {
+      const response = await axiosInstance.get(`/categories/${id}/cards`, {
         params: { page, page_size: pageSize },
       });
       return response.data;
@@ -98,7 +98,7 @@ export const createCard = createAsyncThunk(
   "createCards",
   async (cardObj: cardType) => {
     try {
-      const response = await axiosInstance.post("/cards/", cardObj.card);
+      const response = await axiosInstance.post("/cards", cardObj.card);
 
       if (response.data) {
         cardObj.onAfterCreate();
