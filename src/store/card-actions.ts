@@ -72,7 +72,7 @@ export const getCardsByCategory = createAsyncThunk(
     pageSize?: number;
   }) => {
     try {
-      const response = await axiosInstance.get(`/categories/${id}/cards`, {
+      const response = await axiosInstance.get(`/categories/${id}/cards/`, {
         params: { page, page_size: pageSize },
       });
       return response.data;
