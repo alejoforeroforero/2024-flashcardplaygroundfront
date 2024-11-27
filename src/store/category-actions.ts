@@ -20,7 +20,7 @@ export const createCategory = createAsyncThunk(
   "createCategories",
   async (categoryObj: categoryType) => {
     try {
-      const response = await axiosInstance.post("/categories", {
+      const response = await axiosInstance.post("/categories/", {
         name: categoryObj.name,
       });
       if (response.data) {
