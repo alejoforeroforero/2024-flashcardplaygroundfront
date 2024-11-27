@@ -3,7 +3,7 @@ import axiosInstance from "./axios";
 
 export const getCategories = createAsyncThunk("getCategories", async () => {
   try {
-    const response = await axiosInstance.get("/categories/");
+    const response = await axiosInstance.get("/api/categories");
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
@@ -20,7 +20,7 @@ export const createCategory = createAsyncThunk(
   "createCategories",
   async (categoryObj: categoryType) => {
     try {
-      const response = await axiosInstance.post("/categories", {
+      const response = await axiosInstance.post("/api/categories", {
         name: categoryObj.name,
       });
       if (response.data) {
