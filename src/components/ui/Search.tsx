@@ -2,11 +2,13 @@ import { useState, useEffect, type ChangeEvent } from "react";
 import { searchCards, fetchPaginatedCards } from "@/store/card-actions";
 import { useInfoDispatch } from "@/store/hooks";
 import { useDebounce } from "@/hooks/hooks";
+import { useInfoSelector } from "@/store/hooks";
 
-import './Search.css';
+import "./Search.css";
 
 const Search = () => {
   const dispatch = useInfoDispatch();
+  const user = useInfoSelector((state) => state.user);
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearch = useDebounce(searchValue);
 
@@ -18,14 +20,15 @@ const Search = () => {
     if (debouncedSearch) {
       const searchParams = {
         query: debouncedSearch,
-        page: 0
+        page: 0,
       };
       dispatch(searchCards(searchParams));
-    }else{
-       dispatch(fetchPaginatedCards({ page: 0 }));
+    } else {
+      if (user.id > 0) {
+        dispatch(fetchPaginatedCards({ page: 0, userId: user.id }));
+      }
     }
-  }, [debouncedSearch, dispatch]);
-
+  }, [debouncedSearch, dispatch, user.id]);
 
   return (
     <div className="search">

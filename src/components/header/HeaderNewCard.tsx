@@ -22,9 +22,10 @@ const HeaderNewCard = () => {
           front: frontValue,
           back: backValue,
           category_id: categoryS,
+          user_id:1
         },
         onAfterCreate: () => {
-          dispatch(fetchPaginatedCards({ page: 0 }));
+          dispatch(fetchPaginatedCards({ page: 0, userId:1 }));
         },
       };
 

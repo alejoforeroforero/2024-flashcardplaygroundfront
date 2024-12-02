@@ -10,15 +10,15 @@ type SearchParams = {
 };
 
 export const searchCards = createAsyncThunk(
-  'cards/search',
+  "cards/search",
   async ({ query, page, pageSize = PAGE_SIZE }: SearchParams) => {
     try {
-      const response = await axiosInstance.get('/search', {
+      const response = await axiosInstance.get("/search", {
         params: {
           query,
           page,
-          page_size: pageSize
-        }
+          page_size: pageSize,
+        },
       });
       return response.data;
     } catch (error) {
@@ -28,10 +28,11 @@ export const searchCards = createAsyncThunk(
   }
 );
 
-
 export const getCards = createAsyncThunk("getCards", async () => {
+  const userId = 2;
+
   try {
-    const response = await axiosInstance.get("/cards");
+    const response = await axiosInstance.get(`/users/${userId}/cards`);
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
@@ -44,18 +45,22 @@ export const fetchPaginatedCards = createAsyncThunk(
   async ({
     page,
     pageSize = PAGE_SIZE,
+    userId,
   }: {
     page: number;
     pageSize?: number;
+    userId: number;
   }) => {
-    try {
-      const response = await axiosInstance.get(`/cards`, {
-        params: { page, page_size: pageSize },
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      throw error;
+    if (userId > 0) {
+      try {
+        const response = await axiosInstance.get(`/cards`, {
+          params: { page, page_size: pageSize, user_id: userId },
+        });
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        throw error;
+      }
     }
   }
 );
@@ -67,7 +72,7 @@ export const getCardsByCategory = createAsyncThunk(
     page,
     pageSize = PAGE_SIZE,
   }: {
-    id:number;
+    id: number;
     page: number;
     pageSize?: number;
   }) => {
@@ -87,6 +92,7 @@ type cardInfo = {
   front: string;
   back: string;
   category_id: number;
+  user_id: number;
 };
 
 type cardType = {
