@@ -1,6 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import {
-  getCards,
   fetchPaginatedCards,
   getCardsByCategory,
   createCard,
@@ -14,9 +13,9 @@ export type Status = {
   info: CardT[];
   totalCount: number;
   currentPage: number;
-  mode:string;
-  categoryIdView:number;
-  query:string;
+  mode: string;
+  categoryIdView: number;
+  query: string;
   status: string;
   loading: boolean;
   successMessage: string;
@@ -27,9 +26,9 @@ const initialState: Status = {
   info: [],
   totalCount: 0,
   currentPage: 0,
-  mode:'all',
-  categoryIdView:0,
-  query:'',
+  mode: "all",
+  categoryIdView: 0,
+  query: "",
   status: "",
   loading: true,
   successMessage: "",
@@ -59,30 +58,11 @@ export const cardSlice = createSlice({
         }));
         state.totalCount = action.payload.total_count;
         state.currentPage = action.payload.current_page;
-        state.mode = 'all';
+        state.mode = "all";
       })
       .addCase(fetchPaginatedCards.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || "Failed to fetch cards";
-      })
-      //Get all cards
-      .addCase(getCards.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(getCards.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.loading = false;
-        state.successMessage = "All ok!";
-        state.info = [...action.payload].map((card) => ({
-          ...card,
-          active: false,
-        }));
-        state.mode = 'all';
-      })
-      .addCase(getCards.rejected, (state) => {
-        state.status = "failed";
-        state.error = "No sabemos pero algo paso";
-        alert(state.error);
       })
       //Get cards by category
       .addCase(getCardsByCategory.pending, (state) => {
@@ -96,7 +76,7 @@ export const cardSlice = createSlice({
         }));
         state.totalCount = action.payload.total_count;
         state.currentPage = action.payload.current_page;
-        state.mode = 'category';
+        state.mode = "category";
         state.categoryIdView = action.payload.category_id;
       })
       .addCase(getCardsByCategory.rejected, (state) => {
@@ -140,7 +120,7 @@ export const cardSlice = createSlice({
         state.info = action.payload.cards;
         state.totalCount = action.payload.total_count;
         state.currentPage = action.payload.current_page;
-        state.mode = 'search';
+        state.mode = "search";
         state.query = action.payload.search_term;
       })
       .addCase(searchCards.rejected, (state, action) => {

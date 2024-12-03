@@ -7,17 +7,19 @@ type SearchParams = {
   query: string;
   page: number;
   pageSize?: number;
+  userId:number;
 };
 
 export const searchCards = createAsyncThunk(
   "cards/search",
-  async ({ query, page, pageSize = PAGE_SIZE }: SearchParams) => {
+  async ({ query, page, pageSize = PAGE_SIZE, userId }: SearchParams) => {
     try {
-      const response = await axiosInstance.get("/search", {
+      const response = await axiosInstance.get("/search/cards/?", {
         params: {
           query,
           page,
           page_size: pageSize,
+          user_id:userId
         },
       });
       return response.data;
@@ -28,17 +30,6 @@ export const searchCards = createAsyncThunk(
   }
 );
 
-export const getCards = createAsyncThunk("getCards", async () => {
-  const userId = 2;
-
-  try {
-    const response = await axiosInstance.get(`/users/${userId}/cards`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    throw error;
-  }
-});
 
 export const fetchPaginatedCards = createAsyncThunk(
   "cards/fetchPaginated",

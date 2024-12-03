@@ -21,6 +21,7 @@ const Search = () => {
       const searchParams = {
         query: debouncedSearch,
         page: 0,
+        userId:user.id
       };
       dispatch(searchCards(searchParams));
     } else {
