@@ -14,7 +14,7 @@ export const searchCards = createAsyncThunk(
   "cards/search",
   async ({ query, page, pageSize = PAGE_SIZE, userId }: SearchParams) => {
     try {
-      const response = await axiosInstance.get("/search/cards/?", {
+      const response = await axiosInstance.get("/search/cards?", {
         params: {
           query,
           page,
