@@ -95,7 +95,7 @@ export const createCard = createAsyncThunk(
   "createCards",
   async (cardObj: cardType) => {
     try {
-      const response = await axiosInstance.post("/cards", cardObj.card);
+      const response = await axiosInstance.post("/cards/", cardObj.card);
 
       if (response.data) {
         cardObj.onAfterCreate();
