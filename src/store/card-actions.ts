@@ -44,7 +44,7 @@ export const fetchPaginatedCards = createAsyncThunk(
   }) => {
     if (userId > 0) {
       try {
-        const response = await axiosInstance.get(`/cards`, {
+        const response = await axiosInstance.get(`/cards/`, {
           params: { page, page_size: pageSize, user_id: userId },
         });
         return response.data;
