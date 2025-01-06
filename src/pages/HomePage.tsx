@@ -5,10 +5,12 @@ import {
   getCardsByCategory,
   searchCards,
 } from "@/store/card-actions";
-import { signIn } from "@/store/user-actions";
+import { signIn, signInB } from "@/store/user-actions";
+import { GoogleLogin } from "@react-oauth/google";
 import CardList from "@/components/cards/CardList";
 import Header from "@/components/header/Header";
 import Pagination from "@/components/ui/Pagination";
+import { CredentialResponse } from "@react-oauth/google";
 
 const HomePage = () => {
   const dispatch = useInfoDispatch();
@@ -29,6 +31,7 @@ const HomePage = () => {
           const searchParams = {
             query: query,
             page: 0,
+            userId: user.id,
           };
           dispatch(searchCards(searchParams));
         }
@@ -45,27 +48,44 @@ const HomePage = () => {
       const searchParams = {
         query: query,
         page: newPage,
+        userId: user.id,
       };
       dispatch(searchCards(searchParams));
     }
   };
 
-  const handleSignin = () => {
-    const userEmail = "alejoforeroforero@gmail.com";
-    dispatch(signIn({ email: userEmail }));
+  const handleGoogleLoginSuccess = (credentialResponse: CredentialResponse) => {
+   
+    if (credentialResponse.credential) {
+      dispatch(signIn({ credential: credentialResponse.credential }));
+    }
+  };
+
+  const handleLogin = () => {
+    dispatch(signInB());
   };
 
   return (
     <>
-      {!user.isSignedIn && <button onClick={handleSignin}>Sigin</button>}
+      {!user.isSignedIn && (
+        <>
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={() => {
+              console.log("Login failed");
+            }}
+          />
+          <button onClick={handleLogin}>Login</button>
+        </>
+      )}
       {user.isSignedIn && (
         <>
-          <h1>{user.email}</h1>
           <header>
             <Header />
           </header>
           <div className="card-list-container">
             {info.length > 0 && <CardList cards={info} />}
+            {info.length < 1 && <p>There is no cards created</p>}
           </div>
           <div>
             <Pagination

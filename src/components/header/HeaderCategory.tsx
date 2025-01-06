@@ -7,14 +7,15 @@ const HeaderCategory = () => {
   const dispatch = useInfoDispatch();
   const categories = useInfoSelector((state) => state.categories.list);
   const categoryS = useInfoSelector((state) => state.categories.idSelected);
+  const user = useInfoSelector((state) => state.user);
 
   const categoryName = useRef<HTMLInputElement>(null);
   const [creatingNewCategpory, setCreatingNewCategory] =
     useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
+    dispatch(getCategories(user.id));
+  }, [dispatch, user]);
 
   const handleOnSaveCat = () => {
     const nameval = categoryName.current!.value;
@@ -22,8 +23,9 @@ const HeaderCategory = () => {
     if (nameval !== "") {
       const catObj = {
         name: nameval,
+        userId:user.id,
         onAfterCreate: () => {
-          dispatch(getCategories());
+          dispatch(getCategories(user.id));
           setCreatingNewCategory(false);
         },
       };

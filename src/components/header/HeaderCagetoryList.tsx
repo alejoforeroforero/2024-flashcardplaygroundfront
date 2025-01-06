@@ -6,11 +6,12 @@ import { getCardsByCategory } from "@/store/card-actions";
 const HeaderCagetoryList = () => {
   const dispatch = useInfoDispatch();
   const categories = useInfoSelector((state) => state.categories.list);
+  const user = useInfoSelector((state) => state.user);
    
 
   useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
+    dispatch(getCategories(user.id));
+  }, [dispatch, user]);
 
   const handleGetCardsByCategory = (id: number) => {
     dispatch(getCardsByCategory({id:id, page:0}));
@@ -18,6 +19,7 @@ const HeaderCagetoryList = () => {
 
   return (
     <div className="card-header-category-list">
+      {categories.length < 1 && <p>You have no categories created</p>}
       {categories.map((category) => {
         return (
           <p

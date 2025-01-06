@@ -1,5 +1,5 @@
 import { Card as CardT } from "@/App";
-import { useInfoDispatch } from "@/store/hooks";
+import { useInfoDispatch, useInfoSelector } from "@/store/hooks";
 import { toogleActive } from "@/store/card-slice";
 import { deleteCard, fetchPaginatedCards } from "@/store/card-actions";
 
@@ -9,6 +9,7 @@ type CardProp = {
 
 const Card = ({ card }: CardProp) => {
   const dispatch = useInfoDispatch();
+  const user = useInfoSelector((state) => state.user);
 
   const handleOnClick = (id: number) => {
     dispatch(toogleActive(id));
@@ -18,7 +19,7 @@ const Card = ({ card }: CardProp) => {
     const cardObj = {
       id: id,
       onAfterDelete: () => {
-        dispatch(fetchPaginatedCards({page:0}));
+        dispatch(fetchPaginatedCards({page:0, userId:user.id}));
       },
     };
 

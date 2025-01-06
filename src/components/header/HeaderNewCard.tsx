@@ -5,6 +5,7 @@ import HeaderCategory from "./HeaderCategory";
 
 const HeaderNewCard = () => {
   const dispatch = useInfoDispatch();
+  const user = useInfoSelector((state) => state.user);
   const front = useRef<HTMLInputElement>(null);
   const back = useRef<HTMLInputElement>(null);
   const categoryS = useInfoSelector((state) => state.categories.idSelected);
@@ -22,10 +23,10 @@ const HeaderNewCard = () => {
           front: frontValue,
           back: backValue,
           category_id: categoryS,
-          user_id:1
+          user_id:user.id
         },
         onAfterCreate: () => {
-          dispatch(fetchPaginatedCards({ page: 0, userId:1 }));
+          dispatch(fetchPaginatedCards({ page: 0, userId:user.id }));
         },
       };
 

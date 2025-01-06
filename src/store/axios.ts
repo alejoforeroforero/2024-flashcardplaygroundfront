@@ -5,7 +5,10 @@ const baseURL = import.meta.env.VITE_BASE_URL_BACKEND;
 const axiosInstance = axios.create({
   baseURL: `${baseURL}`,
   timeout: 5000,
-  withCredentials: true, // This is important for sending cookies with requests
+  withCredentials: true, 
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 axiosInstance.interceptors.request.use(

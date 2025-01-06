@@ -63,6 +63,7 @@ export const categorySlice = createSlice({
         state.status = "failed";
         state.error = "No sabemos pero algo paso";
       })
+     
   },
 });
 
