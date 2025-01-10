@@ -28,6 +28,11 @@
         align-items: center;
         color: aliceblue;
         cursor: pointer;
+        padding: 20px;
+
+        p{
+          text-align: center;
+        }
       }
 
       .card-info-category{
