@@ -5,6 +5,7 @@ import HeaderNewCard from "./HeaderNewCard";
 import HeaderCagetoryList from "./HeaderCagetoryList";
 import HeaderSettings from "./HeaderSettings";
 import Search from "../ui/Search";
+import { FaCog } from "react-icons/fa";
 
 import "./Header.css";
 
@@ -41,18 +42,22 @@ const Header = () => {
   return (
     <div id="card-header">
       <div className="card-header-top">
-        <p className="header-button" onClick={handleCreateOn}>
-          Crear
-        </p>
-
-        <p className="header-button" onClick={handleCategoriasOn}>
-          Categorias
-        </p>
-
-        <Search />
-        <p className="header-button" onClick={handleSettingsOn}>
-          *
-        </p>
+        <div className="card-header-top-left">
+          <p className={createOn ? `header-button selected` : `header-button`} onClick={handleCreateOn}>
+            Crear
+          </p>
+          <p className={categoriasOn ? `header-button selected` : `header-button`} onClick={handleCategoriasOn}>
+            Categorias
+          </p>
+        </div>
+        <div className="card-header-top-right">
+          <Search />
+        </div>
+        <div className="card-header-settings">
+          <p className="" onClick={handleSettingsOn}>
+            <FaCog size={24} color="#fff" />
+          </p>
+        </div>
       </div>
       {createOn && <HeaderNewCard />}
       {categoriasOn && <HeaderCagetoryList />}

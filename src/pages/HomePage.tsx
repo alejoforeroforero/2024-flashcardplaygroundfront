@@ -5,20 +5,28 @@ import {
   getCardsByCategory,
   searchCards,
 } from "@/store/card-actions";
-import { signIn, signInB } from "@/store/user-actions";
+import { signIn } from "@/store/user-actions";
 import { GoogleLogin } from "@react-oauth/google";
 import CardList from "@/components/cards/CardList";
 import Header from "@/components/header/Header";
 import Pagination from "@/components/ui/Pagination";
 import { CredentialResponse } from "@react-oauth/google";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 const HomePage = () => {
   const dispatch = useInfoDispatch();
 
   const user = useInfoSelector((state) => state.user);
 
-  const { info, totalCount, currentPage, mode, categoryIdView, query } =
-    useInfoSelector((state) => state.cards);
+  const {
+    info,
+    totalCount,
+    currentPage,
+    mode,
+    categoryIdView,
+    query,
+    loading,
+  } = useInfoSelector((state) => state.cards);
 
   useEffect(() => {
     if (user.id > 0) {
@@ -55,37 +63,41 @@ const HomePage = () => {
   };
 
   const handleGoogleLoginSuccess = (credentialResponse: CredentialResponse) => {
-   
     if (credentialResponse.credential) {
       dispatch(signIn({ credential: credentialResponse.credential }));
     }
   };
 
-  const handleLogin = () => {
-    dispatch(signInB());
-  };
+  // const handleLogin = () => {
+  //   dispatch(signInB());
+  // };
 
   return (
     <>
       {!user.isSignedIn && (
-        <>
+        <div className="login">
           <GoogleLogin
             onSuccess={handleGoogleLoginSuccess}
             onError={() => {
               console.log("Login failed");
             }}
           />
-          <button onClick={handleLogin}>Login</button>
-        </>
+          {/* <button onClick={handleLogin}>Login</button> */}
+        </div>
       )}
       {user.isSignedIn && (
         <>
           <header>
             <Header />
           </header>
-          <div className="card-list-container">
-            {info.length > 0 && <CardList cards={info} />}
-            {info.length < 1 && <p>There is no cards created</p>}
+          <div className="card-general-container">
+            {loading && <LoadingSpinner />}
+            {!loading && (
+              <div className="card-list-container">
+                {info.length > 0 && <CardList cards={info} />}
+                {info.length < 1 && <p>There is no cards created</p>}
+              </div>
+            )}
           </div>
           <div>
             <Pagination

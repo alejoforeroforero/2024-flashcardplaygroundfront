@@ -1,12 +1,5 @@
 .search {
-  width: 80%;
+  width: 90%;
   padding-left: 10px;
-}
 
-@media screen and (max-width: 600px) {
-  .search {
-    width: 70%;
-    position: absolute;
-    top:110px;
-  }
 }

@@ -1,31 +1,70 @@
 #card-header {
   .card-header-top {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-    margin-bottom: 30px;
- 
+    margin-bottom: 10px;
+    position: relative;
+
+    .card-header-top-left {
+      display: flex;
+      justify-content: left;
+    }
+
+    .card-header-top-right {
+      width: 60%;
+      display: flex;
+      justify-content: center;     
+    }
+
+    .card-header-settings {
+      position: absolute;
+      right:-20px;
+      top:-20px;
+    }
+
+    .header-button {
+      background-color: #5e5e5e;
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+
+    .selected{
+      background-color: #d55a5a;
+    }
 
     p {
       margin: 0 10px;
       cursor: pointer;
     }
+
     p:hover {
       color: rgb(246, 239, 105);
     }
   }
 
+  
+
   .card-header-category-list {
     display: flex;
     justify-content: center;
+    padding: 6px;
+    margin-bottom: 4px;
+
+    border-radius: 8px;
 
     p {
       margin: 0 8px;
       cursor: pointer;
+      color: #7e7c7c;
     }
 
     p:hover {
       color: rgb(246, 239, 105);
+    }
+
+    .selected{
+      color:#fcfcfc;
     }
   }
 
@@ -38,7 +77,6 @@
   .form-container-int {
     width: 100%;
     max-width: 520px;
-    padding-bottom: 80px;
     text-align: center;
 
     button {
@@ -63,7 +101,6 @@
   form {
     width: 100%;
     max-width: 520px;
-    padding-bottom: 80px;
   }
 
   p {
@@ -104,9 +141,10 @@
     font: inherit;
     width: 100%;
     padding: 0.5rem;
-    background-color: #b4b6c4;
+    background-color: #8e8e91;
     border: none;
     border-radius: 4px;
+    color: #ebebeb;
   }
 }
 
@@ -152,7 +190,7 @@
       background-color: #384c53;
     }
 
-    p{
+    p {
       margin-left: 15px;
     }
 
@@ -172,4 +210,28 @@
       color: #f9a73b;
     }
   }
+}
+
+@media screen and (max-width: 600px) {
+  .card-header-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+
+    .card-header-top-left {
+      width: 100% !important;
+      margin-bottom: 10px;
+      text-align: center;
+      display: flex;
+      justify-content: center !important;
+    }
+
+    .card-header-top-right {
+      width: 100% !important;
+      display: flex;
+      justify-content: center !important;
+    }    
+  }     
 }

@@ -6,6 +6,7 @@ import { getCardsByCategory } from "@/store/card-actions";
 const HeaderCagetoryList = () => {
   const dispatch = useInfoDispatch();
   const categories = useInfoSelector((state) => state.categories.list);
+  const categoryIdView = useInfoSelector((state) => state.cards.categoryIdView);
   const user = useInfoSelector((state) => state.user);
    
 
@@ -25,6 +26,7 @@ const HeaderCagetoryList = () => {
           <p
             onClick={() => handleGetCardsByCategory(category.id)}
             key={category.id}
+            className={categoryIdView == category.id ? 'selected' : 'normal'}
           >
             {category.name}
           </p>

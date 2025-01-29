@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "./axios";
 
-export const PAGE_SIZE = 10;
+export const PAGE_SIZE = 8;
 
 type SearchParams = {
   query: string;
