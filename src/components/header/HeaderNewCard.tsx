@@ -34,7 +34,7 @@ const HeaderNewCard = () => {
 
       e.currentTarget.reset();
     } else {
-      alert("entra algo en cards");
+      alert("All fields must be filled (choose a category and provide values for both front and back).");
     }
   };
 

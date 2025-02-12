@@ -44,10 +44,10 @@ const Header = () => {
       <div className="card-header-top">
         <div className="card-header-top-left">
           <p className={createOn ? `header-button selected` : `header-button`} onClick={handleCreateOn}>
-            Crear
+            Create 
           </p>
           <p className={categoriasOn ? `header-button selected` : `header-button`} onClick={handleCategoriasOn}>
-            Categorias
+            Categories
           </p>
         </div>
         <div className="card-header-top-right">
